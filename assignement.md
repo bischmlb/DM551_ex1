@@ -85,7 +85,7 @@ Letters: RRR, EEE, CC , U, N
 We have 10 letters, and we have 3 repetitions of R, 3 repepetitions of E, 2 repetitions of C.
 
 Solution:
-```py
+```
 10! / (3!3!2!)
 =
 50400
