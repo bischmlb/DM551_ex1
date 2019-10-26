@@ -16,7 +16,21 @@ Consider the worst case {1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1}, which gives us 5 (n
 
 ### Problem 2
 
-a)  
+a)
+
+Possible pairs to make:
+
+We have 9 men, and 6 women, hence:
+
+```
+9*6
+=
+54
+```
+
+
+b)
+
 How many pairs can one make?
 6 Possible pairs, with 3 leftovers. How many can one make?
 The answer is P(9,6)
@@ -39,11 +53,24 @@ Consider: pairs (9,6), (8,5) (7,4) .. (4,1).
 No more women are left.
 This means we have 9!/3! possible ways of combining pairs between men and women.
 
-b)
-
 c)
 
+Two arrangements are only identical when the sequence of arrangements are reversed. Hence,
+Ways to arrange the 6 women around the table = (N-1!) = 5! = 120 ways.
+
 d)
+
+Consider the sequence from the exercise with gaps of men inbetween:
+``` {wi1,mi1,wi2,mi2,wi3,mi3,wi4,mi4,wi5,mi5,wi6,mi6,wi1} ```  
+As we can see, there are 6! ways to arrange the men into the gaps between the women, so that no two women stand next to each other.
+
+Therefore
+```
+6!
+=
+720
+```
+720 ways.
 
 ***
 
@@ -54,7 +81,6 @@ a)
 Suppose we have 2 dice mapped as:
 
 ```
-We suppose there is an equal probability of choosing each letter.
 DIE 1:  
 1:R  
 2:E  
@@ -104,13 +130,54 @@ in python:
 
 ### Problem 5  
 a)
+Possible values X can take:
+We have 2 dice, which means we have 6 unique items 1,2,3,4,5,6.
+
+The range of X is:
+
+```
+X = {1,2,3,4,5,6}
+```
 
 b)
 
+First we find all the possible maximum values, when throwing a pair of dice. The possible outcomes are:
+```
+X((1,1)) = 1  
+X((1,2)) = X((2,1)) = X((2,2) = 2  
+X((1,3)) = X((3,1)) = X((3,2)) = X((2,3)) = X((3,3)) = 3  
+X((1,4)) = X((4,1)) = X((2,4)) = X((4,2)) = X((3,4)) = X((4,3)) = X((4,4)) = 4  
+X((1,5)) = X((5,1)) = X((2,5)) = X((5,2)) = X((5,3)) = X((3,5)) = X((4,5)) = X((5,4)) = X((5,5)) = 5  
+X((1,6)) = X((6,1)) = X((2,6)) = X((6,2)) = X((3,6)) = X((6,3)) = X((4,6)) = X((6,4)) = X((5,6)) = X((6,5)) = X((6,6)) = 6  
+```
+```
+P(X = 1) = 1/36 = 0.0276 = 2.76%
+P(X = 2) = 3/36 = 0.083 = 8.3%
+P(X = 3) = 5/36 = 0.1389 = 13.89%
+P(X = 4) = 7/36 = 0.1945 = 19.45%
+P(X = 5) = 9/36 = 0.25 = 25%
+P(X = 6) = 11/36 = 0.3056 = 30.56%
+```
+
 c)
 
+For values in range X, we have:
 
+1 possible outcome where X = 1  
+3 possible outcomes where X = 2  
+5 possible outcomes where X = 3  
+7 possible outcomes where X = 4  
+9 possible outcomes where X = 5  
+11 possible outcomes where X = 6  
 
+We can now find the expected value E(X):
+```
+E(X)
+=
+1 * 1/36 + 2 * 3/36 + 3 * 5/36 + 4 * 7/36 + 5 * 9/36 + 6 * 11/36
+=
+4.47222222222
+```
 
 ***
 
@@ -144,7 +211,7 @@ We need everything that is not in the set P1 and not in the set P2, also we need
 N = total solutions = C(3+15-1,15) = C(17,15) = 136  
 N(P1) = (Number of solutions with x1 <= 3) = C(3+12-1, 12) = C(14,12) = 91  
 N(P2) = (Number of solutions with x3 <= 4) = C(3+11-1, 11) = C(13,11) = 78  
-N(P1P2) = (Number of solutions with x1 >= 3 and x3 >= 4) = C(3 + 8-1, 8) = C(10,8) = 45  
+N(P1P2) = (Number of solutions with x1 <= 3 and x3 <= 4) = C(3 + 8-1, 8) = C(10,8) = 45  
 
 ```
 N(P1'P2') = 136 - 91 - 78 + 45 = 12
