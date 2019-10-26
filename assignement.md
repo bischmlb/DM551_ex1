@@ -63,10 +63,15 @@ d)
 Consider the sequence from the exercise with gaps of men inbetween:
 ``` {wi1,mi1,wi2,mi2,wi3,mi3,wi4,mi4,wi5,mi5,wi6,mi6,wi1} ```  
 As we can see, there are 6! ways to arrange the men into the gaps between the women, so that no two women stand next to each other.
-
+Because the women are already arranged in the cycle, we will only have to arrange the men.
 Therefore
+
+10C5 ??
+
+((6+6-1)!)/(6!(6-1)!)
+
 ```
-6!
+((6+6-1)!)/(6!(6-1)!)
 =
 720
 ```
@@ -124,6 +129,20 @@ in python:
 ***
 
 ### Problem 4
+
+For n = 0
+1 = 1
+
+BASE CASE
+For n = 1
+3 + 7 = 5 + 5
+
+We assume that for all n = i it holds true.
+
+Now for n = i + 1
+
+
+
 
 ***
 
