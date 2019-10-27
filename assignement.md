@@ -130,22 +130,21 @@ in python:
 
 ### Problem 4
 
-For n = 0
-1 = 1
+Using the binomial theorem with x = 7 and y = 3,  we see that
 
-BASE CASE
-For n = 1
-3 + 7 = 5 + 5
+```
+10n = (7+3)n = ... exercise
+```
 
-We assume that for all n = i it holds true.
+This shows to us that, a set of n elements has a total of 10^n different subsets. Each subset will have 0, 1, ... n-1 or n elements in it. Corresponding there are ```C(n,0)*5^n with 0 elements, C(n,1)*5^n with 1 element ... C(n,n-1)*5^n with n-1 elements and C(n,n)*5^n with n elements.```
 
-Now for n = i + 1
-
-
+```SUM(n,k=0( C(nk)*5^n ))``` gives us the total number of subsets of a set with n elements, hence
+```
+SUM(n,k=0( C(nk)*5^n )) = 10n
+```
 
 
 ***
-
 
 ### Problem 5  
 a)
