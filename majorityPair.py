@@ -35,13 +35,14 @@ def majorityPair(set, m):
                 if j == xt:
                     count = count + 1
             if count == K:
-                print(xt, "HAS K(", count, ") occurences in ", newSet, ", and so does ", xr)
+                print(xt, "HAS K(", count, ") occurences in ", set, ", and so does ", xr)
+                print("MAJORITY PAIR detected: (",xr,",",xt,")")
                 found = True
     return found
 
 
 
 if __name__ == "__main__":
-    S = [2,2,4,4,4,4,2,2,6,7,2,2,2,2,2,2,2,4,4,4,4,4,4,4,1,5,8,9,7,3]
+    S = [2,2,1,5,1,9,2,1]
     print("LKENGTGBH :", len(S))
     print(majorityPair(S, 10))
