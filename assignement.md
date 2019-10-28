@@ -159,7 +159,7 @@ X = {1,2,3,4,5,6}
 
 b)
 
-First we find all the possible maximum values, when throwing a pair of dice. The possible outcomes are:
+First we find all the possible scenarios of maximum values, when throwing a pair of dice. The possibilities are:
 ```
 X((1,1)) = 1  
 X((1,2)) = X((2,1)) = X((2,2) = 2  
@@ -288,11 +288,93 @@ b)
 ***
 ### Problem 8
 
+**Monte Carlo algorithms and majority element**
+
+When looking for the majority element in a set of integers, we know that an element is a majority element if the element occurs more than n/2 times, for a set with n elements. When dealing with Monte Carlo algorithms, there is always a probability that the algorithm can return the wrong answer, but it is possible to reduce this probability by having a significant number of test cases, or iterations.  
+The Monte Carlo algorithm for the majority element will iterate through a loop m times, and pick a random element s from a given set S, and check if s is a majority element of S. If it is, it will return true and stop the algorithm, and if no majority element is found for m iterations, it will break the loop and return false.  
+In order to find the number of repetitions we need, in order to reduce the probability that the algorithm will return the wrong answer, we can make the assumption that there exists a majority element in the given set. If we assume this, then we know that the majority element will occur for more than n/2 times, hence, the probability of not stumbling upon the majority element is less than 1/2. This means that the probability that all of the chosen elements are not equal to the majority element is at most (1/2)^m, because all of our chosen elements, are chosen independently, meaning we do not base our choices on any previous computations. Hence, the more iterations m of the main loop, the lower the probability that all of the elements will be different from the majority element.  
+
 a)
+
+Pseudocode for *A*:
+```
+S'
+firstFound = False
+Found = False
+
+For i in range 0 to m, do
+  if firstFound is False, then
+    xr = random(S)
+    count = 0
+    For j in S, do
+      if j is equal to xr, then
+        count++
+        if count is at least K, then
+          For k in range 0 to length(S), do
+            if S[k] is not equal to xr, then
+              Append S[k] to S'
+              if k is equal to length(S)-1, then
+                firstFound = True
+  if length(S') is not 0, then
+    xt = random(S')
+    count = 0
+      For j in S', do
+        if j is equal to xt, then
+          count++
+      if count is at least K, then
+        Found = True
+return Found
+
+
+```
+in python (for self):
+
+```py
+def majorityPair(set, m):
+    newSet = []
+    found = False
+    firstFound = False
+    K = math.floor(len(set)/3)+1
+    for i in range(0,m):
+        if firstFound == False:
+            xr = random.choice(set)
+            print("CHOSEN xr:", xr)
+            count = 0
+            for j in set:
+                if j == xr:
+                    count = count + 1
+                    if count == K:
+                        print("count == K")
+                        for k in range(0,len(set)):
+                            print("POPPING ELEMENT ...")
+                            if set[k] != xr:
+                                newSet.append(set[k])
+                                print("Element popped, newSet:")
+                                print(newSet)
+                                if k == len(set)-1:
+                                    firstFound = True
+        if len(newSet) != 0:
+            xt = random.choice(newSet)
+            print("CHOSEN xt:", xt)
+            count = 0
+            for j in newSet:
+                if j == xt:
+                    count = count + 1
+            if count == K:
+                print(xt, "HAS K(", count, ") occurences in ", newSet, ", and so does ", xr)
+                found = True
+    return found
+```
 
 b)
 
+The reason why ```A``` is always correct if it returns ```true```, is because it only returns ```true``` if it finds a second element ```xt```, which appears in the resulting set ```S'```  
+Should step 2 successfully find a case where x_r occurs K times in S, and pass the resulting set S' to step3, but for every x_t there won't be K occurences, then we will return ```false```, and move to the next iteration(round). The algorithm will simply skip step 3 and 4, if it does not find and element ```xr``` that occurs at least K times, and move to the next iteration ```m+1```.
+
 c)
+
+The reason why S can have at most one majority pair, is because, assuming that there is a majority pair in S, we will have ```2 * (n/3+1)``` occurences of x_i, x_j in the set, which means that we will have ```n - (2*K)``` elements left in the set.      
+Because we add 1 to n/3 in K, the majority pair will occur for ```more than``` 2/3 occurences, and the remaining n - (2*K) elements will not be able to fulfill the requirement of being at least K, even if they were all the same.
 
 d)
 
