@@ -277,6 +277,8 @@ N(P1'P2'P3') = 136 - 55 - 28 - 21 + 1 + 0 + 0 - 0 = **33** solutions.
 
 
 d)
+Ways to distribute 7 balls into 3 boxes, with k = 7, n = 3:  
+C((7+3-1),3-1) = C(9,2) = 36 ways.
 
 ***
 
