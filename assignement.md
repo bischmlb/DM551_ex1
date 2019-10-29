@@ -312,12 +312,12 @@ For i in range 0 to m, do
       if j is equal to xr, then
         count++
         if count is at least K, then
-          For k in range 0 to length(S), do
+          For k in range 0 to size(S), do
             if S[k] is not equal to xr, then
               Append S[k] to S'
-              if k is equal to length(S)-1, then
+              if k is equal to size(S)-1, then
                 firstFound = True
-  if length(S') is not 0, then
+  if size(S') is not 0, then
     xt = random(S')
     count = 0
       For j in S', do
@@ -371,7 +371,7 @@ def majorityPair(set, m):
 b)
 
 The reason why ```A``` is always correct if it returns ```true```, is because it only returns ```true``` if it finds a second element ```xt```, which appears in the resulting set ```S'```  
-Should step 2 successfully find a case where x_r occurs K times in S, and pass the resulting set S' to step3, but for every x_t there won't be K occurences, then we will return ```false```, and move to the next iteration(round). The algorithm will simply skip step 3 and 4, if it does not find and element ```xr``` that occurs at least K times, and move to the next iteration ```m+1```.
+Should step 2 successfully find a case where x_r occurs K times in S, and pass the resulting set S' to step3, but for every x_t there won't be K occurences, then we will return ```false```, and move to the next iteration(round). The algorithm will simply skip step 3 and 4, if it does not find an element ```xr``` that occurs at least K times, and move to the next iteration ```m+1```.
 
 c)
 
@@ -379,6 +379,30 @@ The reason why S can have at most one majority pair, is because, assuming that t
 Because we add 1 to n/3 in K, the majority pair will occur for ```more than``` 2/3 occurences, and the remaining n - (2*K) elements will not be able to fulfill the requirement of being at least K, even if they were all the same.
 
 d)
+
+When assuming that we have a majority pair in a given set, we can define event E1 for representing the probability of choosing the first element xr, and E2 for choosing the second element xt, making it a majority pair.
+
+The chance of picking the first majority pair element xr from the intial set S is equal to 2*K, which is at least 2/3. This is given that our choices are of course independent.
+```
+E1 = 2*(n/3+1) >= 2/3 = 0.66 = 66%
+```
+The chance of picking the second majority pair element xt from the leftover set, after deleting the elements which are copies of xr, is the chance K of picking an element from S'. We have to remember, that when we receive S', n/3+1 elements in the set will be gone. This means that the probability of selecting xr, will not be the same as the probability of selecting xt, because there will be less occurences, and thereby possibilites of picking a majority number. But, we also have to remember that the new set will be smaller than the initial thus, this will also increase the chance of finding xt.
+The total amount of elements we will have left to choose from in S' is therefore:  
+```n - (n * 1/3 + 1)```  
+The amount of numbers that will be a part of the majority pair does however not change, and will still be our initial number of elements ```n/3+1```. This means that the probability of choosing the second majority pair element xt will be at least  1/2:  
+```
+E2 = (n/3+1)/(n-(n*1/3+1)) >= 1/2 = 0.50 = 50%
+```
+
+Now we can find the lower bound for  
+```
+p(E1 ∩ E2) = (2*(n/3+1)/n)*(n/3+1)/(n-(n*1/3+1))
+```
+Because the events are already represented as their lower bounds, being E1 >= 66%, E2 >= 50%, we can find the lower bound by multiplying ```E1 * E2```:  
+```
+2/3 * 1/2 = 2/6 = 1/3 = 0.33 = 33%
+```
+This proves that, we will have atleast 1/3 or 33% chance to find the majority pair in any of the loops.
 
 e)
 
