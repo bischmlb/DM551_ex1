@@ -28,7 +28,6 @@ We have 9 men, and 6 women, hence:
 54
 ```
 
-
 b)
 
 How many pairs can one make?
@@ -219,23 +218,8 @@ C(17,15)
 
 b)
 
-We apply the principle of inclusion-exclusion. Consider:  
-P1 if x1 <= 3, P2 if x3 <= 4.
-The number of solutions satisfying this is:  
-N(P1'P2') = N - N(P1) - N(P2) + N(P1P2)  
-We need everything that is not in the set P1 and not in the set P2, also we need to add P1P2, since it is already included in the two sets.
-
-
-N = total solutions = C(3+15-1,15) = C(17,15) = 136  
-N(P1) = (Number of solutions with x1 <= 3) = C(3+12-1, 12) = C(14,12) = 91  
-N(P2) = (Number of solutions with x3 <= 4) = C(3+11-1, 11) = C(13,11) = 78  
-N(P1P2) = (Number of solutions with x1 <= 3 and x3 <= 4) = C(3 + 8-1, 8) = C(10,8) = 45  
-
-```
-N(P1'P2') = 136 - 91 - 78 + 45 = 12
-```
-
-12 Solutions.
+For this we recognize that a solution to this will correspond to a choice of 4 items of type 1, and 5 items of type 3, with a choice of 6 additional items of any type. We still have 3 variables defined, so still 3 different kinds of types, but no condition for type 2 x2. So:
+C(3+6-1,6) = C(8,6) = C(8,2) = 28 solutions.
 
 
 c)  
@@ -285,6 +269,26 @@ C((7+3-1),3-1) = C(9,2) = 36 ways.
 ### Problem 7
 
 a)
+m committees with k persons
+each committe k different skills from set S with n skills
+one person per skill
+exactly n different persons covering the skills
+
+example: 4 skills = 4 people
+3 committees with 3 skills each, each skill = one person.
+
+n skills = n different persons (distinct)
+
+We know that, if we have n skills, each skills will be covered by n distinct persons. We do not know how many of them are men, and how many are women, and this is not important, because we dont care whether the skills are being covered by a man or a woman, we are just interested in making pairs between persons p1, p2 ..pn.  
+Ways to assign persons to n skills is therefore the number of skills n, and the number of persons pn, multiplied:
+n * n = n^2
+
+s1 p1 p2 p3 p4
+s2 p1 p2 p3 p4
+s3 p1 p2 p3 p4
+s4 p1 p2 p3 p4
+
+
 
 b)
 ***
